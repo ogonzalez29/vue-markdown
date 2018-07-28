@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>
+        <div class="title">
             <h2>{{ title }}</h2>
         </div>
         
@@ -10,7 +10,7 @@
                     <textarea  v-model="markdown" name="" id="" cols="80" rows="15" @keyup="postMark"></textarea>
                 </div>
 
-                <div class="col-md-6" v-html="compiledMarkdown"></div>
+                <div id="preview" class="col-md-6" v-html="compiledMarkdown"></div>
            </div>
         </div>
     </div>
@@ -30,8 +30,8 @@ export default {
   },
 
   created() {
-    let pusher = new Pusher("734ff5d8f1e5ed1dd419", {
-      cluster: "us2",
+    let pusher = new Pusher("YOUR_API_KEY", {
+      cluster: "CLUSTER",
       encrypted: true
     });
 
@@ -49,3 +49,14 @@ export default {
   }
 };
 </script>
+
+
+<style>
+.title {
+  margin-bottom: 40px;
+}
+#preview {
+  border: 2px solid;
+  text-align: left;
+}
+</style>
