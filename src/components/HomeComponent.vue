@@ -30,7 +30,7 @@ export default {
   },
 
   created() {
-    let pusher = new Pusher("YOUR_API_KEY", {
+    let pusher = new Pusher("YOUR_APP_KEY", {
       cluster: "CLUSTER",
       encrypted: true
     });
@@ -42,7 +42,7 @@ export default {
   },
 
   methods: {
-    postMark(event) {
+    postMark() {
       const text = this.markdown;
       axios.post("http://localhost:3000/markdown", { text });
     }
