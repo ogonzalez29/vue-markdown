@@ -7,7 +7,7 @@
         <div>
            <div class="row">
                 <div class="col-md-6">
-                    <textarea  v-model="markdown" name="" id="" cols="80" rows="15" @keyup="postMark"></textarea>
+                   <textarea v-model="markdown" cols="80" rows="15" @keyup="postMark"></textarea>
                 </div>
 
                 <div id="preview" class="col-md-6" v-html="compiledMarkdown"></div>
@@ -18,6 +18,8 @@
 
 <script>
 import axios from "axios";
+import pusher from "pusher";
+import marked from "marked";
 
 export default {
   name: "Home",
@@ -29,21 +31,23 @@ export default {
     };
   },
 
+  mounted() {},
+
   created() {
-    let pusher = new Pusher("YOUR_APP_KEY", {
-      cluster: "CLUSTER",
+    let pusher = new Pusher("734ff5d8f1e5ed1dd419", {
+      cluster: "us2",
       encrypted: true
     });
-
     const channel = pusher.subscribe("markdown");
     channel.bind("new-text", data => {
       this.compiledMarkdown = data.markdown;
+      this.markdown = data.text;
     });
   },
 
   methods: {
-    postMark() {
-      const text = this.markdown;
+    postMark: function(e) {
+      const text = e.target.value;
       axios.post("http://localhost:3000/markdown", { text });
     }
   }

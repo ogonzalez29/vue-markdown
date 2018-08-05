@@ -22,7 +22,8 @@ const pusher = new Pusher({
 app.set('port', process.env.PORT || 3000);
 app.post('/markdown', (req, res) => {
     const payload = {
-        markdown: marked(req.body.text || "", { sanitize: true })
+        markdown: marked(req.body.text || "", { sanitize: true }),
+        text: req.body.text
     }
     pusher.trigger('markdown', 'new-text', payload);
     res.send(payload)
