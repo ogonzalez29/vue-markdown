@@ -35,7 +35,7 @@ export default {
 
   created() {
     let pusher = new Pusher("734ff5d8f1e5ed1dd419", {
-      cluster: "us2",
+      cluster: "CLUSTER",
       encrypted: true
     });
     const channel = pusher.subscribe("markdown");
