@@ -9,7 +9,6 @@
                 <div class="col-md-6">
                    <textarea v-model="markdown" cols="80" rows="15" @keyup="postMark"></textarea>
                 </div>
-
                 <div id="preview" class="col-md-6" v-html="compiledMarkdown"></div>
            </div>
         </div>
