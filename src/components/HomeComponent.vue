@@ -33,7 +33,7 @@ export default {
   mounted() {},
 
   created() {
-    let pusher = new Pusher("734ff5d8f1e5ed1dd419", {
+    let pusher = new Pusher("PUSHER_KEY", {
       cluster: "CLUSTER",
       encrypted: true
     });
