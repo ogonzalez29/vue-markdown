@@ -7,7 +7,7 @@
         <div>
            <div class="row">
                 <div class="col-md-6">
-                   <textarea v-model="markdown" cols="80" rows="15" @keyup="postMark"></textarea>
+                   <textarea v-model="markdown" cols="80" rows="15" @input="postMark"></textarea>
                 </div>
                 <div id="preview" class="col-md-6" v-html="compiledMarkdown"></div>
            </div>
@@ -26,28 +26,32 @@ export default {
     return {
       title: "Realtime Markdown Editor",
       markdown: "",
-      compiledMarkdown: ""
+      channel : {}
     };
   },
 
-  mounted() {},
+  computed : {
+    compiledMarkdown: function () {
+      return marked(this.markdown, { sanitize: true })
+    }
+  },
 
   created() {
-    let pusher = new Pusher("PUSHER_KEY", {
-      cluster: "CLUSTER",
-      encrypted: true
+    let pusher = new Pusher("YOUR_APP_KEY", {
+      cluster: "mt1",
+      encrypted: true,
+      authEndpoint: 'http://localhost:3000/pusher/auth',
     });
-    const channel = pusher.subscribe("markdown");
-    channel.bind("new-text", data => {
-      this.compiledMarkdown = data.markdown;
-      this.markdown = data.text;
+    this.channel = pusher.subscribe("private-markdown");
+    this.channel.bind("client-new-text", data => {
+      this.markdown = data;
     });
   },
 
   methods: {
     postMark: function(e) {
       const text = e.target.value;
-      axios.post("http://localhost:3000/markdown", { text });
+      this.channel.trigger("client-new-text", text);
     }
   }
 };

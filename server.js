@@ -1,9 +1,7 @@
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const Pusher = require('pusher');
-const marked = require('marked');
 require('dotenv').config();
 
 const app = express();
@@ -19,15 +17,14 @@ const pusher = new Pusher({
     cluster: process.env.PUSHER_APP_CLUSTER,
     encrypted: true
 });
-app.set('port', process.env.PORT || 3000);
-app.post('/markdown', (req, res) => {
-    const payload = {
-        markdown: marked(req.body.text || "", { sanitize: true }),
-        text: req.body.text
-    }
-    pusher.trigger('markdown', 'new-text', payload);
-    res.send(payload)
-})
-app.listen(app.get('port'), () => {
-    console.log("Server started on " + app.get('port'));
-})
+
+app.post('/pusher/auth', function(req, res) {
+  var socketId = req.body.socket_id;
+  var channel = req.body.channel_name;
+  var auth = pusher.authenticate(socketId, channel);
+  res.send(auth);
+});
+
+var port = process.env.PORT || 3000;
+app.listen(port);
+console.log("Listening on 3000")
