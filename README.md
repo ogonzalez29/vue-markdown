@@ -43,7 +43,7 @@ PUSHER_APP_CLUSTER=YOUR_APP_CLUSTER
 
 ## Add Pusher Credential to HomeComponent
 
-Open `HomeComponent.vue` and update with your Pusher `YOUR_APP_KEY` and `CLUSTER`:
+Open `./src/components/HomeComponent.vue` and update with the appropriate credentials as obtained from your Pusher dashboard `YOUR_APP_KEY` and `CLUSTER`:
 
 ```ini
     let pusher = new Pusher("YOUR_APP_KEY", {
