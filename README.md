@@ -41,6 +41,18 @@ PUSHER_APP_SECRET=YOUR_APP_SECRET
 PUSHER_APP_CLUSTER=YOUR_APP_CLUSTER
 ```
 
+## Add Pusher Credential to HomeComponent
+
+Open `HomeComponent.vue` and update with your Pusher `YOUR_APP_KEY` and `CLUSTER`:
+
+```ini
+    let pusher = new Pusher("YOUR_APP_KEY", {
+      cluster: "CLUSTER",
+      ...
+    });
+```
+
+
 ### Run the application
 ```bash
 $ npm start

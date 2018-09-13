@@ -38,7 +38,7 @@ export default {
 
   created() {
     let pusher = new Pusher("YOUR_APP_KEY", {
-      cluster: "mt1",
+      cluster: "CLUSTER",
       encrypted: true,
       authEndpoint: 'http://localhost:3000/pusher/auth',
     });
