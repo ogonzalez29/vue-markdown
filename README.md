@@ -1,6 +1,6 @@
 ## Build a realtime markdown editor with Vue
 
-This project contains the source code for a realtime markdown editor built with Vue.js and Pusher. [Artile here](https://pusher.com/tutorials/markdown-editor-vue)
+This project contains the source code for a realtime markdown editor built with Vue.js and Pusher. [Article here](https://pusher.com/tutorials/markdown-editor-vue)
 
 
 ![ezgif com-video-to-gif 12](https://user-images.githubusercontent.com/19610753/43530532-b76fcd54-95a5-11e8-88d8-47551de6df3f.gif)
